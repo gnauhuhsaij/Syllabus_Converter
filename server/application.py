@@ -3,18 +3,18 @@ from SyllabusConverter import read_docx, query_chatgpt, setup_openai_api
 import os
 from dotenv import load_dotenv
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 last_result = None
 
-@app.route('/')
+@application.route('/')
 def index():
     if last_result:
         return last_result
     else:
         return "No syllabus conversions have been done yet."
 
-@app.route('/upload', methods=['POST'])
+@application.route('/upload', methods=['POST'])
 def handle_upload():
     global last_result
 
@@ -36,4 +36,5 @@ if __name__ == '__main__':
     load_dotenv()  # Load environment variables from .env file
     api_key = os.getenv('OPENAI_API_KEY')  # Get API key from environment variable
     setup_openai_api(api_key)
-    app.run(debug=True) 
+    from waitress import serve
+    serve(application, host="0.0.0.0", port=8080)
