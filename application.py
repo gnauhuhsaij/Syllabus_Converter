@@ -2,6 +2,8 @@ from flask import Flask, request, jsonify
 from SyllabusConverter import read_docx, query_chatgpt, setup_openai_api
 import os
 from dotenv import load_dotenv
+from Calendar import get_google_calendar_service, create_events
+import json 
 
 application = Flask(__name__)
 
@@ -28,7 +30,15 @@ def handle_upload():
     result = query_chatgpt(prompt)
 
     last_result = jsonify(result.content).get_data(as_text=True)
-    # print(result)
+
+    credentials_path = 'credentials.json'
+    service = get_google_calendar_service(credentials_path)
+    calendar_id = 'primary'
+
+
+    events_data = json.load(last_result)
+
+    create_events(service, calendar_id, events_data)
     return last_result
 
 
@@ -38,3 +48,5 @@ if __name__ == '__main__':
     setup_openai_api(api_key)
     from waitress import serve
     serve(application, host="0.0.0.0", port=8080)
+
+    

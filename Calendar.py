@@ -28,17 +28,14 @@ def create_events(service, calendar_id, events_data):
         except Exception as e:
             print(f"Error creating event: {e}")
 
-def main():
-    credentials_path = 'credentials.json'
-    service = get_google_calendar_service(credentials_path)
+# def main():
+#     credentials_path = 'credentials.json'
+#     service = get_google_calendar_service(credentials_path)
 
-    calendar_id = 'primary'
+#     calendar_id = 'primary'
 
-    with open('syllabus_events.json', 'r') as file:
-        events_data = json.load(file)
+#     with open('syllabus_events.json', 'r') as file:
+#         events_data = json.load(file)
 
-    # Call the function to create events
-    create_events(service, calendar_id, events_data)
-
-if name == "main":
-    main()
+#     # Call the function to create events
+#     create_events(service, calendar_id, events_data)
