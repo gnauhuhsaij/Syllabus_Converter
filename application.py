@@ -33,7 +33,7 @@ def handle_upload():
     last_result  = result.content
 
     credentials_path = 'credentials.json'
-    service = get_google_calendar_service(credentials_path)
+    service = get_google_calendar_service(credentials_path = credentials_path)
 
     new_calendar = {
         'summary': 'Quarter Schedule',
