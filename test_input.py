@@ -1,7 +1,7 @@
 import requests
 
 # URL of your Flask server
-url = 'https://s2c-9ea6877338c9.herokuapp.com/upload'
+url = 'http://127.0.0.1:5000/upload'
 
 # Path to the file you want to upload
 file_path = '../A.docx'

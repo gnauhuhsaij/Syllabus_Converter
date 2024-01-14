@@ -29,16 +29,21 @@ def handle_upload():
 
     result = query_chatgpt(prompt)
 
-    last_result = jsonify(result.content).get_data(as_text=True)
+    # last_result = jsonify(result.content).get_data(as_text=True)
+    last_result  = result.content
 
     credentials_path = 'credentials.json'
     service = get_google_calendar_service(credentials_path)
-    calendar_id = 'primary'
 
+    new_calendar = {
+        'summary': 'Quarter Schedule',
+        'timeZone': 'America/Los_Angeles'
+    }
+    created_calendar = service.calendars().insert(body=new_calendar).execute()
+    new_calendar_id = created_calendar['id']
 
-    events_data = json.load(last_result)
-
-    create_events(service, calendar_id, events_data)
+    events_data = json.loads(last_result)
+    create_events(service, new_calendar_id, events_data)
     return last_result
 
 
