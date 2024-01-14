@@ -10,7 +10,7 @@ def get_google_calendar_service(credentials_path='credentials.json'):
         credentials_path,
         ['https://www.googleapis.com/auth/calendar.app.created']
     )
-    creds = flow.run_local_server(port=8080)
+    creds = flow.run_local_server(port=8081)
     return googleapiclient.discovery.build('calendar', 'v3', credentials=creds)
 
 def create_events(service, calendar_id, events_data):

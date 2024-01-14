@@ -26,8 +26,10 @@ def handle_upload():
 
     # Assuming your script has a function like process_file(file_path)
     prompt = read_docx(file_path)
+    print(prompt)
 
     result = query_chatgpt(prompt)
+    print(result)
 
     # last_result = jsonify(result.content).get_data(as_text=True)
     last_result  = result.content
@@ -50,6 +52,7 @@ def handle_upload():
 if __name__ == '__main__':
     load_dotenv()  # Load environment variables from .env file
     api_key = os.getenv('OPENAI_API_KEY')  # Get API key from environment variable
+    print(api_key)
     setup_openai_api(api_key)
     from waitress import serve
     serve(application, host="0.0.0.0", port=8080)
