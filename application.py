@@ -26,10 +26,8 @@ def handle_upload():
 
     # Assuming your script has a function like process_file(file_path)
     prompt = read_docx(file_path)
-    print(prompt)
-
+    
     result = query_chatgpt(prompt)
-    print(result)
 
     # last_result = jsonify(result.content).get_data(as_text=True)
     last_result  = result.content
