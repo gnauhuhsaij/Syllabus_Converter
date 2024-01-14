@@ -8,7 +8,7 @@ import os
 def get_google_calendar_service(credentials_path='credentials.json'):
     flow = InstalledAppFlow.from_client_secrets_file(
         credentials_path,
-        ['https://www.googleapis.com/auth/calendar']
+        ['https://www.googleapis.com/auth/calendar.app.created']
     )
     creds = flow.run_local_server(port=8080)
     return googleapiclient.discovery.build('calendar', 'v3', credentials=creds)
